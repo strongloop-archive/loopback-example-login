@@ -1,0 +1,77 @@
+<style>
+    #inputEmail {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+
+<div class="container-fluid">
+    <form ng-submit="getAccessTokens(email)">
+        <div class="form-group">
+            <input type="text" class="form-control" id="inputEmail"
+                   placeholder="email or username" ng-model="email">
+            <button type="submit" class="btn btn-primary">List Access Tokens
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="container-fluid" ng-show="tokens && tokens.length">
+
+    <div class="row-fluid span4">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>User Id</th>
+                <th>Id</th>
+                <th>Date Created</th>
+                <th>Date Expired</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="token in tokens">
+                <td>{{token.userId}}</td>
+                <td>{{token.id}}</td>
+                <td>{{token.created | date:'short'}}</td>
+
+                <td>
+
+                    <!-- Date picker -->
+                    <div class="form-group">
+                        <input type="text" size="10" class="form-control"
+                               ng-model="token.expired" data-autoclose="1"
+                               data-min-date="{{token.created}}"
+                               placeholder="Date" bs-datepicker>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" size="8" class="form-control"
+                               ng-model="token.expired" data-autoclose="1"
+                               placeholder="Time" bs-timepicker>
+                    </div>
+
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-default btn-sm"
+                            ng-click="updateAccessToken($index, token.id)"
+                            title="Update the access token"
+                            >
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-sm"
+                            ng-click="deleteAccessToken($index, token.id)"
+                            title="Remove the access token"
+                            >
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div ng-show="status">{{status}}</div>

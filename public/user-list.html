@@ -1,0 +1,53 @@
+<div class="container-fluid">
+
+    <div class="row-fluid span12">
+        <div class="span12">
+            <!--Sidebar content-->
+            Go to page: <input type="number" ng-model="page" min="0" max="200"
+                         ng-change="load('', page * 50, 50)">
+
+            Filter: <input ng-model="query">
+
+        </div>
+
+        <table data-ng-init="load('', page * 50, 50)" ng-show="users.length"
+               class="table table-striped" style="table-layout: fixed">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Set as default</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users | filter: query">
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <!--
+                <td>{{user.description}}</td>
+                -->
+                <td>{{user.email}}</td>
+                <td>{{user.created}}</td>
+                <td>{{user.status}}</td>
+
+                <td ng-show="!isDefaultUser(user.id)">
+                    <button type="button" class="btn btn-default btn-sm"
+                            ng-click="setUser(user.username, user.id)"
+                            title="Set user as default"
+                            >
+                        <span class="glyphicon glyphicon-check"></span>
+                    </button>
+                </td>
+
+            </tr>
+            <tr>
+                <td>{{status}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

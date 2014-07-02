@@ -1,0 +1,89 @@
+<style>
+    #inputEmail {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+
+<div class="container-fluid">
+    <form ng-submit="getSubscriptions(email)">
+        <div class="form-group">
+            <!--
+            <label for="inputEmail">Email or User Name: </label>
+            -->
+            <input type="text" class="form-control" id="inputEmail"
+                   placeholder="email or username" ng-model="email">
+            <button type="submit" class="btn btn-primary">List Subscriptions
+            </button>
+            <a class="btn btn-primary" ng-show="userId"
+               href="#subscriptions/create/{{userId}}">Add subscription</a>
+        </div>
+    </form>
+</div>
+
+<div class="container-fluid" ng-show="subscriptions && subscriptions.length">
+
+    <div class="row-fluid span4">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Level</th>
+                <th>Activation Date</th>
+                <th>Expiration Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="subscription in subscriptions">
+                <td>{{subscription.id}}</td>
+                <td>{{subscription.product}}</td>
+                <td>{{subscription.level}}</td>
+                <td>
+
+                    <!-- Date picker -->
+                    <div class="form-group">
+                        <input type="text" size="10" class="form-control"
+                               ng-model="subscription.activationDate"
+                               data-autoclose="1"
+                               placeholder="Activation Date" bs-datepicker>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" size="8" class="form-control"
+                               ng-model="subscription.expirationDate"
+                               data-min-date="{{subscription.activationDate}}"
+                               data-autoclose="1"
+                               placeholder="Expiration Date" bs-datepicker>
+                    </div>
+
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-default btn-sm"
+                            ng-click="updateSubscription($index, subscription.id)"
+                            title="Update the subscription"
+                            >
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-sm"
+                            ng-click="deleteSubscription($index, subscription.id)"
+                            title="Remove the subscription"
+                            >
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<p></p>
+
+<div ng-show="status">{{status}}</div>
+

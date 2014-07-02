@@ -1,0 +1,21 @@
+{
+  "name": "studio-login",
+  "version": "1.0.0",
+  "homepage": "https://github.com/strongloop/studio-login",
+  "authors": [
+    "Raymond Feng <raymond@strongloop.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "angular": "~1.2.16",
+    "angular-strap": "~2.0.3",
+    "angular-route": "~1.2.17"
+  }
+}

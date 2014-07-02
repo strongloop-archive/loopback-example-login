@@ -1,0 +1,25 @@
+{
+  "name": "strong-studio-admin",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "install": "bower install"
+  },
+  "dependencies": {
+    "connect-ensure-login": "~0.1.1",
+    "ejs": "~1.0.0",
+    "loopback": "1.x >=1.8.8",
+    "loopback-connector-mongodb": "~1.4.1",
+    "loopback-connector-mysql": "~1.4.1",
+    "loopback-component-passport": "~1.0.3",
+    "passport": "~0.2.0",
+    "passport-local": "~1.0.0",
+    "passport-oauth2": "~1.1.2",
+    "request": "~2.36.0"
+  },
+  "optionalDependencies": {
+    "loopback-explorer": "~1.1.1",
+    "loopback-component-push": "~1.2.2"
+  }
+}
