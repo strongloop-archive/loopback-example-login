@@ -1,25 +1,35 @@
 {
-  "db": {
-    "defaultForType": "db",
-    "connector": "mongodb"
-  },
-  "push": {
-    "defaultForType": "push",
-    "connector": "loopback-push-notification",
-    "installation": "installation",
-    "notification": "notification",
-    "application": "application"
-  },
-  "mail": {
-    "defaultForType": "mail",
-    "connector": "mail"
-  },
-  "mysql": {
-    "connector": "mysql",
-    "host": "localhost",
-    "port": 3306,
-    "database": "wordpress",
-    "username": "your-user",
-    "password": "your-password"
-  }
+	"db": {
+		"defaultForType": "db",
+		"connector": "mongodb"
+	},
+	"push": {
+		"defaultForType": "push",
+		"connector": "loopback-push-notification",
+		"installation": "installation",
+		"notification": "notification",
+		"application": "application"
+	},
+	"mail": {
+		"defaultForType": "mail",
+		"connector": "mail"
+	},
+	"mysql": {
+		"connector": "mysql",
+		"host": "localhost",
+		"port": 3306,
+		"database": "wordpress",
+		"username": "wordpress",
+		"password": "wordpress"
+	},
+
+	"postgismaster_asistente": {
+		"host": "postgismaster.instagis.com",
+		"port": 5432,
+		"database": "pstn_db",
+		"password": "gis.asdwsx",
+		"name": "postgismaster_asistente",
+		"connector": "postgresql",
+		"user": "gis"
+	} 
 }

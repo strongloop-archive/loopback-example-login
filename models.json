@@ -1,359 +1,311 @@
 {
-  "email": {
-    "options": {
-      "base": "Email"
-    },
-    "dataSource": "mail",
-    "public": false
-  },
-  "userIdentity": {
-    "options": {
-      "base": "UserIdentity",
-      "relations": {
-        "user": {
-          "model": "user",
-          "type": "belongsTo",
-          "foreignKey": "userId"
-        }
-      }
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "userCredential": {
-    "options": {
-      "base": "UserCredential",
-      "relations": {
-        "user": {
-          "model": "user",
-          "type": "belongsTo",
-          "foreignKey": "userId"
-        }
-      }
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "accessToken": {
-    "options": {
-      "base": "AccessToken",
-      "acls": [
-        {
-          "principalType": "ROLE",
-          "principalId": "admin",
-          "permission": "ALLOW"
-        },
-        {
-          "principalType": "ROLE",
-          "principalId": "$everyone",
-          "property": "create",
-          "permission": "DENY"
-        }
-      ]
-    },
-    "dataSource": "db",
-    "public": true
-  },
-  "application": {
-    "options": {
-      "base": "Application"
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "acl": {
-    "options": {
-      "base": "ACL"
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "roleMapping": {
-    "options": {
-      "base": "RoleMapping"
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "role": {
-    "options": {
-      "base": "Role",
-      "relations": {
-        "principals": {
-          "type": "hasMany",
-          "model": "roleMapping",
-          "foreignKey": "roleId"
-        }
-      }
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "scope": {
-    "options": {
-      "base": "Scope"
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "push": {
-    "options": {
-      "base": "Push",
-      "plural": "push"
-    },
-    "dataSource": "push",
-    "public": false
-  },
-  "installation": {
-    "options": {
-      "base": "Installation"
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "notification": {
-    "options": {
-      "base": "Notification"
-    },
-    "dataSource": "db",
-    "public": false
-  },
-  "user": {
-    "dataSource": "mysql",
-    "public": true,
-    "options": {
-      "base": "User",
-      "idInjection": false,
-      "mysql": {
-        "schema": "wordpress",
-        "table": "wp_users"
-      },
-      "acls": [
-        {
-          "principalType": "ROLE",
-          "principalId": "admin",
-          "permission": "ALLOW"
-        }
-      ],
-      "relations": {
-        "accessTokens": {
-          "model": "accessToken",
-          "type": "hasMany",
-          "foreignKey": "userId"
-        },
-        "subscriptions": {
-          "model": "subscription",
-          "type": "hasMany",
-          "foreignKey": "userId"
-        },
-        "identities": {
-          "model": "userIdentity",
-          "type": "hasMany",
-          "foreignKey": "userId"
-        },
-        "linkedAccounts": {
-          "model": "userCredential",
-          "type": "hasMany",
-          "foreignKey": "userId"
-        }
-      }
-    },
-    "properties": {
-      "id": {
-        "type": "Number",
-        "required": false,
-        "length": null,
-        "precision": 20,
-        "scale": 0,
-        "id": 1,
-        "mysql": {
-          "columnName": "ID",
-          "dataType": "bigint",
-          "dataLength": null,
-          "dataPrecision": 20,
-          "dataScale": 0,
-          "nullable": "NO"
-        }
-      },
-      "username": {
-        "type": "String",
-        "required": false,
-        "length": 180,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-          "columnName": "user_login",
-          "dataType": "varchar",
-          "dataLength": 180,
-          "dataPrecision": null,
-          "dataScale": null,
-          "nullable": "NO"
-        }
-      },
-      "password": {
-        "type": "String",
-        "required": false,
-        "length": 192,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-          "columnName": "user_pass",
-          "dataType": "varchar",
-          "dataLength": 192,
-          "dataPrecision": null,
-          "dataScale": null,
-          "nullable": "NO"
-        }
-      },
-      "nicename": {
-        "type": "String",
-        "required": false,
-        "length": 150,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-          "columnName": "user_nicename",
-          "dataType": "varchar",
-          "dataLength": 150,
-          "dataPrecision": null,
-          "dataScale": null,
-          "nullable": "NO"
-        }
-      },
-      "email": {
-        "type": "String",
-        "required": false,
-        "length": 300,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-          "columnName": "user_email",
-          "dataType": "varchar",
-          "dataLength": 300,
-          "dataPrecision": null,
-          "dataScale": null,
-          "nullable": "NO"
-        }
-      },
-      "url": {
-        "type": "String",
-        "required": false,
-        "length": 300,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-          "columnName": "user_url",
-          "dataType": "varchar",
-          "dataLength": 300,
-          "dataPrecision": null,
-          "dataScale": null,
-          "nullable": "NO"
-        }
-      },
-      "created": {
-        "type": "Date",
-        "required": false,
-        "length": null,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-          "columnName": "user_registered",
-          "dataType": "datetime",
-          "dataLength": null,
-          "dataPrecision": null,
-          "dataScale": null,
-          "nullable": "NO"
-        }
-      },
-      "activationKey": {
-        "type": "String",
-        "required": false,
-        "length": 180,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-          "columnName": "user_activation_key",
-          "dataType": "varchar",
-          "dataLength": 180,
-          "dataPrecision": null,
-          "dataScale": null,
-          "nullable": "NO"
-        }
-      },
-      "status": {
-        "type": "Number",
-        "required": false,
-        "length": null,
-        "precision": 10,
-        "scale": 0,
-        "mysql": {
-          "columnName": "user_status",
-          "dataType": "int",
-          "dataLength": null,
-          "dataPrecision": 10,
-          "dataScale": 0,
-          "nullable": "NO"
-        }
-      },
-      "displayName": {
-        "type": "String",
-        "required": false,
-        "length": 750,
-        "precision": null,
-        "scale": null,
-        "mysql": {
-          "columnName": "display_name",
-          "dataType": "varchar",
-          "dataLength": 750,
-          "dataPrecision": null,
-          "dataScale": null,
-          "nullable": "NO"
-        }
-      }
-    }
-  },
-  "subscription": {
-    "properties":{
-      "userId": {
-        "type": "Number",
-        "index": true
-      },
-      "product" :{
-        "type": "String"
-      },
-      "level" :{
-        "type": "String"
-      },
-      "activationDate": {
-        "type": "Date"
-      },
-      "expirationDate": {
-        "type": "Date"
-      }
-    },
-    "options": {
-      "acls": [
-        {
-          "principalType": "ROLE",
-          "principalId": "admin",
-          "permission": "ALLOW"
-        },
-        {
-          "principalType": "ROLE",
-          "principalId": "$owner",
-          "accessType": "READ",
-          "permission": "ALLOW"
-        }
-      ],
-      "relations": {
-        "user": {
-          "model": "user",
-          "type": "belongsTo",
-          "foreignKey": "userId"
-        }
-      }
-    },
-    "dataSource": "db",
-    "public": true
-  }
+	"email": {
+		"options": {
+			"base": "Email"
+		},
+		"dataSource": "mail",
+		"public": false
+	},
+	"userIdentity": {
+		"options": {
+			"base": "UserIdentity",
+			"relations": {
+				"user": {
+					"model": "user",
+					"type": "belongsTo",
+					"foreignKey": "userId"
+				}
+			}
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"userCredential": {
+		"options": {
+			"base": "UserCredential",
+			"relations": {
+				"user": {
+					"model": "user",
+					"type": "belongsTo",
+					"foreignKey": "userId"
+				}
+			}
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"accessToken": {
+		"options": {
+			"base": "AccessToken",
+			"acls": [{
+				"principalType": "ROLE",
+				"principalId": "admin",
+				"permission": "ALLOW"
+			}, {
+				"principalType": "ROLE",
+				"principalId": "$everyone",
+				"property": "create",
+				"permission": "DENY"
+			}]
+		},
+		"dataSource": "db",
+		"public": true
+	},
+	"application": {
+		"options": {
+			"base": "Application"
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"acl": {
+		"options": {
+			"base": "ACL"
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"roleMapping": {
+		"options": {
+			"base": "RoleMapping"
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"role": {
+		"options": {
+			"base": "Role",
+			"relations": {
+				"principals": {
+					"type": "hasMany",
+					"model": "roleMapping",
+					"foreignKey": "roleId"
+				}
+			}
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"scope": {
+		"options": {
+			"base": "Scope"
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"push": {
+		"options": {
+			"base": "Push",
+			"plural": "push"
+		},
+		"dataSource": "push",
+		"public": false
+	},
+	"installation": {
+		"options": {
+			"base": "Installation"
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"notification": {
+		"options": {
+			"base": "Notification"
+		},
+		"dataSource": "db",
+		"public": false
+	},
+	"user": {
+		"dataSource": "postgismaster_asistente",
+		"public": true,
+		"options": {
+			"base": "User",
+			"idInjection": false,
+			"postgresql": {
+				"schema": "asistente",
+				"table": "user"
+			},
+			"acls": [{
+				"principalType": "ROLE",
+				"principalId": "admin",
+				"permission": "ALLOW"
+			}],
+			"relations": {
+				"accessTokens": {
+					"model": "accessToken",
+					"type": "hasMany",
+					"foreignKey": "userId"
+				},
+				"subscriptions": {
+					"model": "subscription",
+					"type": "hasMany",
+					"foreignKey": "userId"
+				},
+				"identities": {
+					"model": "userIdentity",
+					"type": "hasMany",
+					"foreignKey": "userId"
+				},
+				"linkedAccounts": {
+					"model": "userCredential",
+					"type": "hasMany",
+					"foreignKey": "userId"
+				}
+			}
+		},
+		"properties": {
+			"id": {
+				"type": "Number",
+				"required": false,
+				"length": null,
+				"precision": 20,
+				"scale": 0,
+				"id": 1,
+				"postgresql": {
+					"columnName": "id_user"
+				}
+			},
+			"username": {
+				"type": "String",
+				"required": false
+			},
+			"password": {
+				"type": "String",
+				"required": false,
+				"length": 192,
+				"precision": null,
+				"scale": null,
+				"postgresql": {
+					"columnName": "api_secret",
+					"dataType": "character varying"
+				}
+			},
+			"nicename": {
+				"type": "String",
+				"required": false,
+				"length": 150,
+				"precision": null,
+				"scale": null,
+				"postgresql": {
+					"columnName": "username",
+					"dataType": "character varying"
+				}
+			},
+			"email": {
+				"type": "String",
+				"required": false,
+				"length": 300,
+				"precision": null,
+				"scale": null,
+				"postgresql": {
+					"columnName": "usermail",
+					"dataType": "character varying"
+				}
+			},
+			"created": {
+				"type": "Date",
+				"required": false,
+				"length": null,
+				"precision": null,
+				"scale": null,
+				"postgresql": {
+					"columnName": "fecha_registro",
+					"dataType": "datetime"
+				}
+			},
+			"status": {
+				"type": "Number",
+				"required": false,
+				"length": null,
+				"precision": 10,
+				"scale": 0,
+				"postgresql": {
+					"columnName": "activo",
+					"dataType": "integer"
+				}
+			}
+		},
+		"subscription": {
+			"properties": {
+				"userId": {
+					"type": "Number",
+					"index": true
+				},
+				"product": {
+					"type": "String"
+				},
+				"level": {
+					"type": "String"
+				},
+				"activationDate": {
+					"type": "Date"
+				},
+				"expirationDate": {
+					"type": "Date"
+				}
+			},
+			"options": {
+				"acls": [{
+					"principalType": "ROLE",
+					"principalId": "admin",
+					"permission": "ALLOW"
+				}, {
+					"principalType": "ROLE",
+					"principalId": "$owner",
+					"accessType": "READ",
+					"permission": "ALLOW"
+				}],
+				"relations": {
+					"user": {
+						"model": "user",
+						"type": "belongsTo",
+						"foreignKey": "userId"
+					}
+				}
+			},
+			"dataSource": "db",
+			"public": true
+		}
+	},
+	"subscription": {
+		"properties": {
+			"userId": {
+				"type": "Number",
+				"index": true
+			},
+			"product": {
+				"type": "String"
+			},
+			"level": {
+				"type": "String"
+			},
+			"activationDate": {
+				"type": "Date"
+			},
+			"expirationDate": {
+				"type": "Date"
+			}
+		},
+		"options": {
+			"acls": [{
+				"principalType": "ROLE",
+				"principalId": "admin",
+				"permission": "ALLOW"
+			}, {
+				"principalType": "ROLE",
+				"principalId": "$owner",
+				"accessType": "READ",
+				"permission": "ALLOW"
+			}],
+			"relations": {
+				"user": {
+					"model": "user",
+					"type": "belongsTo",
+					"foreignKey": "userId"
+				}
+			}
+		},
+		"dataSource": "db",
+		"public": true
+	}
 }
