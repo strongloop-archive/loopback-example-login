@@ -21,5 +21,6 @@
   "optionalDependencies": {
     "loopback-explorer": "~1.1.1",
     "loopback-component-push": "~1.2.2"
-  }
+  },
+  "license": "MIT"
 }
