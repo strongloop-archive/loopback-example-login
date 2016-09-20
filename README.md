@@ -1,3 +1,7 @@
+DEPRECATED AS OF 2016-09-19
+
+---
+
 # loopback-example-login
 
 The module demonstrates how to use LoopBack to: 
